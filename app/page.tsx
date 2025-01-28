@@ -20,7 +20,7 @@ export default function Home() {
       idToken: idToken,
       provider: 'google',
     });
-    console.log("user", user);
+    console.log("Authenticateion Success", user);
     return JSON.stringify(user);
   }
 
@@ -33,9 +33,13 @@ export default function Home() {
     }
   } 
 
+  useEffect(() => {
+    handleAuthenticate();
+  }, [idToken]);
+
   return (
     <main className="flex min-h-screen flex-col items-center space-y-6 p-12 bg-violet-200">
-      <div className="text-black font-bold text-3xl mb-8">Okto SDK</div>
+      <div className="text-black font-bold text-3xl mb-8">Okto v2 SDK</div>
 
       <div className="grid grid-cols-2 gap-4 w-full max-w-lg mt-8">
         <LoginButton />

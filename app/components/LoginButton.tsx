@@ -5,7 +5,7 @@ export function LoginButton() {
   const { data: session } = useSession();
 
   const handleLogin = () => {
-    session ? signOut() : signIn("google");
+    signIn("google");
   };
 
   return (
@@ -17,7 +17,7 @@ export function LoginButton() {
       }`}
       onClick={handleLogin}
     >
-      Google {session ? "Log Out" : "Log In"}
+      Google Authenticate
     </button>
   );
 }
