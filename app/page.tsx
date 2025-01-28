@@ -33,10 +33,6 @@ export default function Home() {
     }
   } 
 
-  useEffect(() => {
-    handleAuthenticate();
-  }, [idToken]);
-
   return (
     <main className="flex min-h-screen flex-col items-center space-y-6 p-12 bg-violet-200">
       <div className="text-black font-bold text-3xl mb-8">Okto v2 SDK</div>
