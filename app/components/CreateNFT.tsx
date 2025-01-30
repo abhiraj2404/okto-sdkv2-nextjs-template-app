@@ -12,39 +12,53 @@ function CreateNFTCollection() {
   const [recipientAddress, setRecipientAddress] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [userOp, setUserOp] = useState<any | null>(null);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [symbol, setSymbol] = useState("");
+  const [type, setType] = useState("1155");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const nftCollectionParams = {
       networkId: networkName,
-      name: "My NFT Collection",
-      description: "This is my NFT Collection",
+      name,
+      description,
       metadataUri,
-      symbol: "MYNFT",
-      type: "1155",
+      symbol,
+      type,
     };
 
     console.log("NFT collection params", nftCollectionParams);
 
-    nftCollectionCreation(nftCollectionParams, oktoClient)
-      .then((result) => {
-        console.log("NFT Creation success", result);
-        setModalMessage(
-          "NFT Creation Submitted: " + JSON.stringify(result, null, 2)
-        );
-        setModalVisible(true);
-      })
-      .catch((error) => {
-        console.error("NFT Creation failed:", error);
-        setModalMessage("Error: " + error.message);
-        setModalVisible(true);
-      });
+    try {
+      const userOpTmp = await nftCollectionCreation(nftCollectionParams, oktoClient);
+      setUserOp(userOpTmp);
+    } catch (error: any) {
+      console.error("NFT Creation failed:", error);
+      setModalMessage("Error: " + error.message);
+      setModalVisible(true);
+    }
+  };
+
+  const handleSubmitUserOp = async () => {
+    if (!userOp) return;
+    try {
+      const signedUserOp = await oktoClient.signUserOp(userOp);
+      const tx = await oktoClient.executeUserOp(signedUserOp);
+      setModalMessage("NFT Creation Submitted: " + JSON.stringify(tx, null, 2));
+      setModalVisible(true);
+    } catch (error: any) {
+      console.error("NFT Creation failed:", error);
+      setModalMessage("Error: " + error.message);
+      setModalVisible(true);
+    }
   };
 
   const handleCloseModal = () => setModalVisible(false);
 
   return (
-    <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-lg max-w-md mx-auto">
-      <h1 className="text-white text-2xl font-bold mb-6">Create NFT</h1>
+    <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto">
+      <h1 className="text-white text-2xl font-bold mb-6">Create NFT Collection</h1>
       
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
@@ -55,16 +69,23 @@ function CreateNFTCollection() {
       
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
-        value={contractAddress}
-        onChange={(e) => setContractAddress(e.target.value)}
-        placeholder="Enter NFT Contract Address"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Enter Collection Name"
       />
       
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
-        value={tokenId}
-        onChange={(e) => setTokenId(e.target.value)}
-        placeholder="Enter Token ID"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Enter Collection Description"
+      />
+      
+      <input
+        className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
+        value={symbol}
+        onChange={(e) => setSymbol(e.target.value)}
+        placeholder="Enter Collection Symbol"
       />
       
       <input
@@ -73,20 +94,34 @@ function CreateNFTCollection() {
         onChange={(e) => setMetadataUri(e.target.value)}
         placeholder="Enter Metadata URI"
       />
-      
+
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
-        value={recipientAddress}
-        onChange={(e) => setRecipientAddress(e.target.value)}
-        placeholder="Enter Recipient Address"
+        value={type}
+        onChange={(e) => setType(e.target.value)}
+        placeholder="Enter NFT Type (e.g. 1155, 721)"
       />
-      
+
       <button
         className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         onClick={handleSubmit}
       >
-        Create NFT
+        Create NFT Operation
       </button>
+
+      {userOp && (
+        <>
+          <div className="w-full mt-4 p-4 bg-gray-800 rounded text-white overflow-auto">
+            <pre>{JSON.stringify(userOp, null, 2)}</pre>
+          </div>
+          <button
+            className="w-full p-2 mt-4 bg-green-500 text-white rounded hover:bg-green-600"
+            onClick={handleSubmitUserOp}
+          >
+            Sign and Send Transaction
+          </button>
+        </>
+      )}
 
       {modalVisible && (
         <div className="fixed text-white inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">

@@ -35,13 +35,18 @@ function TransferTokens() {
   };
 
   const handleSubmitUserOp = async () => {
-    if(!userOp) return;
-    const signedUserOp = await oktoClient.signUserOp(userOp);
-    const tx = await oktoClient.executeUserOp(signedUserOp);
-    setModalMessage("Transfer Submitted: " + JSON.stringify(tx, null, 2));
-    setModalVisible(true);
-  }
-  
+    if (!userOp) return;
+    try {
+      const signedUserOp = await oktoClient.signUserOp(userOp);
+      const tx = await oktoClient.executeUserOp(signedUserOp);
+      setModalMessage("Transfer Submitted: " + JSON.stringify(tx, null, 2));
+      setModalVisible(true);
+    } catch (error: any) {
+      console.error("Transfer failed:", error);
+      setModalMessage("Error: " + error.message);
+      setModalVisible(true);
+    }
+  };
 
   const handleCloseModal = () => setModalVisible(false);
 
