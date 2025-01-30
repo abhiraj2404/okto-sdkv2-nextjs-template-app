@@ -15,7 +15,8 @@ const GetButton: React.FC<GetButtonProps> = ({ title, apiFn }) => {
     apiFn(oktoClient)
       .then((result: any) => {
         console.log(`${title}:`, result);
-        setResultData(JSON.stringify(result, null, 2)); // Pretty print the JSON
+        const resultData = JSON.stringify(result, null, 2);
+        setResultData(resultData !== "null" ? resultData : "No result"); // Pretty print the JSON
         setModalVisible(true);
       })
       .catch((error: any) => {
