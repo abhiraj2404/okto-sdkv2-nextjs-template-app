@@ -45,7 +45,6 @@ export default function Home() {
         <GetButton title="Okto Log out" apiFn={handleLogout} />
         <GetButton title="getAccount" apiFn={getAccount} />
         <GetButton title="getChains" apiFn={getChains} />
-        <GetButton title="getNftCollections" apiFn={getNftCollections} />
         <GetButton title="getOrdersHistory" apiFn={getOrdersHistory} />
         <GetButton title="getPortfolio" apiFn={getPortfolio} />
         <GetButton title="getPortfolioActivity" apiFn={getPortfolioActivity} />
