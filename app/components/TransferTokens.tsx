@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Address, tokenTransfer, useOkto } from "@okto_web3/react-sdk";
+import { Address, tokenTransfer, useOkto, UserOp } from "@okto_web3/react-sdk";
 
 function TransferTokens() {
   const oktoClient = useOkto();
@@ -13,8 +13,9 @@ function TransferTokens() {
   );
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [userOp, setUserOp] = useState<any | null>(null);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log("Calling transfer funds: ", {
       networkName,
       tokenAddress,
@@ -29,18 +30,18 @@ function TransferTokens() {
       chain: networkName,
     }
 
-    tokenTransfer(oktoClient, transferParams)
-      .then((result) => {
-        console.log("Transfer success", result);
-        setModalMessage(
-          "Transfer Submitted: " + JSON.stringify(result, null, 2)
-        );
-        setModalVisible(true);
-      })
-      .catch((error) => {
-
-      });
+    const userOpTmp = await tokenTransfer(oktoClient, transferParams)
+    setUserOp(userOpTmp);
   };
+
+  const handleSubmitUserOp = async () => {
+    if(!userOp) return;
+    const signedUserOp = await oktoClient.signUserOp(userOp);
+    const tx = await oktoClient.executeUserOp(signedUserOp);
+    setModalMessage("Transfer Submitted: " + JSON.stringify(tx, null, 2));
+    setModalVisible(true);
+  }
+  
 
   const handleCloseModal = () => setModalVisible(false);
 
@@ -75,8 +76,22 @@ function TransferTokens() {
         className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         onClick={handleSubmit}
       >
-        Transfer Tokens
+        Create Transfer
       </button>
+
+      {userOp && (
+        <>
+          <div className="w-full mt-4 p-4 bg-gray-800 rounded text-white overflow-auto">
+            <pre>{JSON.stringify(userOp, null, 2)}</pre>
+          </div>
+          <button
+            className="w-full p-2 mt-4 bg-green-500 text-white rounded hover:bg-green-600"
+            onClick={handleSubmitUserOp}
+          >
+            Sign and Send Transaction
+          </button>
+        </>
+      )}
 
       {modalVisible && (
         <div className="fixed text-white inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
