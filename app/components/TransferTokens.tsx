@@ -16,19 +16,14 @@ function TransferTokens() {
   const [userOp, setUserOp] = useState<any | null>(null);
 
   const handleSubmit = async () => {
-    console.log("Calling transfer funds: ", {
-      networkName,
-      tokenAddress,
-      recipientAddress,
-      quantity,
-    });
-
     const transferParams = {
       amount: Number(quantity),
       recipient: recipientAddress as Address,
       token: tokenAddress as Address,
       chain: networkName,
     }
+
+    console.log("Transfer params: ", transferParams);
 
     const userOpTmp = await tokenTransfer(oktoClient, transferParams)
     setUserOp(userOpTmp);
