@@ -4,6 +4,7 @@ import { useSession, signOut } from "next-auth/react";
 import { LoginButton } from "@/app/components/LoginButton";
 import GetButton from "@/app/components/GetButton";
 import {getAccount, getChains, getNftCollections, getOrdersHistory, getPortfolio, getPortfolioActivity, getPortfolioNFT, getTokens, useOkto } from '@okto_web3/react-sdk';
+import TransferTokens from "./components/TransferTokens";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -50,8 +51,12 @@ export default function Home() {
         <GetButton title="getPortfolioActivity" apiFn={getPortfolioActivity} />
         <GetButton title="getPortfolioNFT" apiFn={() => getPortfolioNFT} />
         <GetButton title="getTokens" apiFn={() => getTokens} />
-
       </div>
+
+      <div className="flex flex-col gap-2 w-full max-w-xl">
+        <TransferTokens />
+      </div>
+
       
       {/* <div className="flex flex-col gap-2 w-full max-w-lg">
         <TransferTokens apiFn={transferTokens} /> 
