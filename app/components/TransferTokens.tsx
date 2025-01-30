@@ -7,7 +7,7 @@ function TransferTokens() {
 
   const [networkName, setNetworkName] = useState("");
   const [tokenAddress, setTokenAddress] = useState("");
-  const [quantity, setQuantity] = useState("1");
+  const [quantity, setQuantity] = useState("");
   const [recipientAddress, setRecipientAddress] = useState(
     ""
   );
@@ -45,7 +45,7 @@ function TransferTokens() {
   const handleCloseModal = () => setModalVisible(false);
 
   return (
-    <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-lg max-w-md mx-auto">
+    <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto">
       <h1 className="text-white text-2xl font-bold mb-6">Transfer Tokens</h1>
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"

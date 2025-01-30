@@ -12,12 +12,12 @@ export function LoginButton() {
     <button
       className={`border border-transparent rounded px-4 py-2 transition-colors ${
         session
-          ? "bg-red-500 hover:bg-red-700 text-white"
+          ? "bg-blue-500 hover:bg-blue-700 text-white"
           : "bg-blue-500 hover:bg-blue-700 text-white"
       }`}
       onClick={handleLogin}
     >
-      Google Authenticate
+      Authenticate
     </button>
   );
 }

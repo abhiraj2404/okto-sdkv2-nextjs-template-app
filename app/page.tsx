@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect, useMemo } from "react";
+import React, { use, useEffect, useMemo } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { LoginButton } from "@/app/components/LoginButton";
 import GetButton from "@/app/components/GetButton";
 import {getAccount, getChains, getNftCollections, getOrdersHistory, getPortfolio, getPortfolioActivity, getPortfolioNFT, getTokens, useOkto } from '@okto_web3/react-sdk';
-import TransferTokens from "./components/TransferTokens";
+import Link from "next/link";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -34,6 +34,12 @@ export default function Home() {
     }
   } 
 
+  useEffect(()=>{
+    if(idToken){
+      handleAuthenticate();
+    }
+  }, [idToken])
+
   return (
     <main className="flex min-h-screen flex-col items-center space-y-6 p-12 bg-violet-200">
       <div className="text-black font-bold text-3xl mb-8">Okto v2 SDK</div>
@@ -41,7 +47,7 @@ export default function Home() {
       <div className="grid grid-cols-2 gap-4 w-full max-w-lg mt-8">
         <LoginButton />
 
-        <GetButton title="Okto Authenticate" apiFn={handleAuthenticate} />
+        {/* <GetButton title="Okto Authenticate" apiFn={handleAuthenticate} /> */}
         <GetButton title="Okto Log out" apiFn={handleLogout} />
         <GetButton title="getAccount" apiFn={getAccount} />
         <GetButton title="getChains" apiFn={getChains} />
@@ -52,9 +58,13 @@ export default function Home() {
         <GetButton title="getTokens" apiFn={getTokens} />
       </div>
 
-      <div className="flex flex-col gap-2 w-full max-w-xl">
-        <TransferTokens />
-      </div>
+      <Link 
+        href="/transfer" 
+        className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+      >
+        Go to Transfer Page
+      </Link>
     </main>
   );
 }
+
