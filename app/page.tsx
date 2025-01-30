@@ -49,18 +49,13 @@ export default function Home() {
         <GetButton title="getOrdersHistory" apiFn={getOrdersHistory} />
         <GetButton title="getPortfolio" apiFn={getPortfolio} />
         <GetButton title="getPortfolioActivity" apiFn={getPortfolioActivity} />
-        <GetButton title="getPortfolioNFT" apiFn={() => getPortfolioNFT} />
-        <GetButton title="getTokens" apiFn={() => getTokens} />
+        <GetButton title="getPortfolioNFT" apiFn={getPortfolioNFT} />
+        <GetButton title="getTokens" apiFn={getTokens} />
       </div>
 
       <div className="flex flex-col gap-2 w-full max-w-xl">
         <TransferTokens />
       </div>
-
-      
-      {/* <div className="flex flex-col gap-2 w-full max-w-lg">
-        <TransferTokens apiFn={transferTokens} /> 
-      </div>  */}
     </main>
   );
 }
