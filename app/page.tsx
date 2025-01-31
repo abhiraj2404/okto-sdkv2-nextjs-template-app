@@ -55,17 +55,41 @@ export default function Home() {
     setIsConfigOpen(false);
   };
 
+  // Add this function to handle config reset
+  const handleResetConfig = () => {
+    const defaultConfig = {
+      environment: process.env.NEXT_PUBLIC_ENVIRONMENT || 'sandbox',
+      vendorPrivKey: process.env.NEXT_PUBLIC_VENDOR_PRIVATE_KEY || '',
+      vendorSWA: process.env.NEXT_PUBLIC_VENDOR_SWA || '',
+    };
+    setConfig(defaultConfig);
+    localStorage.removeItem('okto_config');
+    setIsConfigOpen(false);
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center space-y-6 p-12 bg-violet-200">
       <div className="text-black font-bold text-3xl mb-8">Okto v2 SDK</div>
 
-      {/* Add Config Button */}
+      {/* Config Button */}
       <button
         onClick={() => setIsConfigOpen(!isConfigOpen)}
         className="px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
       >
         {isConfigOpen ? 'Close Config' : 'Update Config'}
       </button>
+
+      {/* Current Config Display */}
+      {!isConfigOpen && (
+        <div className="w-full max-w-lg bg-white p-4 rounded-lg shadow-md">
+          <h3 className="font-medium text-gray-700 mb-2">Current Configuration:</h3>
+          <div className="text-sm text-gray-600">
+            <p>Environment: {config.environment}</p>
+            <p>Vendor Private Key: {config.vendorPrivKey ? '••••••••' : 'Not set'}</p>
+            <p>Vendor SWA: {config.vendorSWA ? '••••••••' : 'Not set'}</p>
+          </div>
+        </div>
+      )}
 
       {/* Config Form */}
       {isConfigOpen && (
@@ -102,12 +126,21 @@ export default function Home() {
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
-          >
-            Save Configuration
-          </button>
+          <div className="flex gap-4">
+            <button
+              type="submit"
+              className="flex-1 px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+            >
+              Save Configuration
+            </button>
+            <button
+              type="button"
+              onClick={handleResetConfig}
+              className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            >
+              Reset to Default
+            </button>
+          </div>
         </form>
       )}
 
