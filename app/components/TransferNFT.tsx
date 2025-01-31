@@ -14,6 +14,7 @@ function TransferNFT() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [userOp, setUserOp] = useState<any | null>(null);
+  const [userOpString, setUserOpString] = useState<string>("");
 
   const handleSubmit = async () => {
     const transferParams = {
@@ -30,6 +31,7 @@ function TransferNFT() {
     try {
       const userOpTmp = await nftTransfer(transferParams, oktoClient);
       setUserOp(userOpTmp);
+      setUserOpString(JSON.stringify(userOpTmp, null, 2));
     } catch (error: any) {
       console.error("NFT Transfer failed:", error);
       setModalMessage("Error: " + error.message);
@@ -38,9 +40,10 @@ function TransferNFT() {
   };
 
   const handleSubmitUserOp = async () => {
-    if (!userOp) return;
+    if (!userOpString) return;
     try {
-      const signedUserOp = await oktoClient.signUserOp(userOp);
+      const editedUserOp = JSON.parse(userOpString);
+      const signedUserOp = await oktoClient.signUserOp(editedUserOp);
       const tx = await oktoClient.executeUserOp(signedUserOp);
       setModalMessage("NFT Transfer Submitted: " + JSON.stringify(tx, null, 2));
       setModalVisible(true);
@@ -108,8 +111,14 @@ function TransferNFT() {
 
       {userOp && (
         <>
-          <div className="w-full mt-4 p-4 bg-gray-800 rounded text-white overflow-auto">
-            <pre>{JSON.stringify(userOp, null, 2)}</pre>
+          <div className="w-full mt-4">
+            <textarea
+              className="w-full p-4 bg-gray-800 rounded text-white font-mono text-sm"
+              value={userOpString}
+              onChange={(e) => setUserOpString(e.target.value)}
+              rows={10}
+              style={{ resize: 'vertical' }}
+            />
           </div>
           <button
             className="w-full p-2 mt-4 bg-green-500 text-white rounded hover:bg-green-600"
