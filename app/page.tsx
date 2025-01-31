@@ -7,10 +7,22 @@ import {getAccount, getChains, getOrdersHistory, getPortfolio, getPortfolioActiv
 import Link from "next/link";
 import { ConfigContext } from "@/app/components/providers";
 
+// Add type definitions
+interface Config {
+  environment: string;
+  vendorPrivKey: string;
+  vendorSWA: string;
+}
+
+interface ConfigContextType {
+  config: Config;
+  setConfig: React.Dispatch<React.SetStateAction<Config>>;
+}
+
 export default function Home() {
   const { data: session } = useSession();
   const oktoClient = useOkto();
-  const { config, setConfig } = useContext(ConfigContext);
+  const { config, setConfig } = useContext<ConfigContextType>(ConfigContext);
   const [isConfigOpen, setIsConfigOpen] = useState(false);
   
   //@ts-ignore
@@ -43,19 +55,19 @@ export default function Home() {
     }
   }, [idToken])
 
-  // Add this function to handle config updates
-  const handleConfigUpdate = (e: any) => {
+  // Update the handleConfigUpdate function
+  const handleConfigUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.target as HTMLFormElement);
     setConfig({
-      environment: formData.get('environment'),
-      vendorPrivKey: formData.get('vendorPrivKey'),
-      vendorSWA: formData.get('vendorSWA'),
+      environment: (formData.get('environment') as string) || 'sandbox',
+      vendorPrivKey: (formData.get('vendorPrivKey') as string) || '',
+      vendorSWA: (formData.get('vendorSWA') as string) || '',
     });
     setIsConfigOpen(false);
   };
 
-  // Add this function to handle config reset
+  // Update the handleResetConfig function
   const handleResetConfig = () => {
     const defaultConfig = {
       environment: process.env.NEXT_PUBLIC_ENVIRONMENT || 'sandbox',
@@ -63,7 +75,11 @@ export default function Home() {
       vendorSWA: process.env.NEXT_PUBLIC_VENDOR_SWA || '',
     };
     setConfig(defaultConfig);
-    localStorage.removeItem('okto_config');
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (error) {
+      console.error('Error removing config from localStorage:', error);
+    }
     setIsConfigOpen(false);
   };
 
