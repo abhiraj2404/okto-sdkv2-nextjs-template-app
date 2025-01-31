@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@okto_web3/core-js-sdk": "0.0.0-dev.30",
-    "@okto_web3/react-sdk": "0.0.0-dev.30",
+    "@okto_web3/core-js-sdk": "0.0.0-dev.32",
+    "@okto_web3/react-sdk": "0.0.0-dev.32",
     "axios": "^1.7.2",
     "next": "14.2.3",
     "next-auth": "^4.24.7",
