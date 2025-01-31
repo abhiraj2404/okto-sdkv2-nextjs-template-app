@@ -61,7 +61,7 @@ function TransferNFT() {
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
         value={networkId}
         onChange={(e) => setNetworkId(e.target.value)}
-        placeholder="Enter Network ID"
+        placeholder="Enter Network ChainId"
       />
       
       <input

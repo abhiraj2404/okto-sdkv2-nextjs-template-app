@@ -64,7 +64,7 @@ function CreateNFTCollection() {
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
         value={networkName}
         onChange={(e) => setNetworkName(e.target.value)}
-        placeholder="Enter Network Name"
+        placeholder="Enter Network ChainId"
       />
       
       <input
