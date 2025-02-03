@@ -18,18 +18,18 @@ function TransferNFT() {
 
   const handleSubmit = async () => {
     const transferParams = {
-      networkId,
+      caip2Id: networkId,
       collectionAddress: collectionAddress as Address,
       nftId,
       recipientWalletAddress: recipientWalletAddress as Address,
       amount: Number(amount),
-      type: type as 'nft' | '',
+      nftType: type as 'ERC721' | 'ERC1155',
     };
 
     console.log("NFT transfer params", transferParams);
 
     try {
-      const userOpTmp = await nftTransfer(transferParams, oktoClient);
+      const userOpTmp = await nftTransfer(oktoClient, transferParams);
       setUserOp(userOpTmp);
       setUserOpString(JSON.stringify(userOpTmp, null, 2));
     } catch (error: any) {
