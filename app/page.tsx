@@ -194,6 +194,13 @@ export default function Home() {
       >
         Go to Transfer NFT Page
       </Link>
+
+      <Link 
+        href="/evmrawtxn" 
+        className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+      >
+        Go to EVM Raw transaction
+      </Link>
     </main>
   );
 }
