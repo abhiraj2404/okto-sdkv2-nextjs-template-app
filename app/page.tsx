@@ -181,12 +181,12 @@ export default function Home() {
         Go to Transfer Page
       </Link>
 
-      <Link 
+      {/* <Link 
         href="/createnft" 
         className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
       >
         Go to Create NFT Page
-      </Link>
+      </Link> */}
 
       <Link 
         href="/transfernft" 

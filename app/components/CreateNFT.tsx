@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { nftCollectionCreation, useOkto } from "@okto_web3/react-sdk";
+import { useOkto } from "@okto_web3/react-sdk";
+// import { nftCollectionCreation, useOkto } from "@okto_web3/react-sdk";
 
 function CreateNFTCollection() {
   const oktoClient = useOkto();
@@ -32,9 +33,9 @@ function CreateNFTCollection() {
     console.log("NFT collection params", nftCollectionParams);
 
     try {
-      const userOpTmp = await nftCollectionCreation(nftCollectionParams, oktoClient);
-      setUserOp(userOpTmp);
-      setUserOpString(JSON.stringify(userOpTmp, null, 2));
+      // const userOpTmp = await nftCollectionCreation(nftCollectionParams, oktoClient);
+      // setUserOp(userOpTmp);
+      // setUserOpString(JSON.stringify(userOpTmp, null, 2));
     } catch (error: any) {
       console.error("NFT Creation failed:", error);
       setModalMessage("Error: " + error.message);
