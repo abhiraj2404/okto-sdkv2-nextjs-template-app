@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@okto_web3/core-js-sdk':
-        specifier: 0.0.0-dev.32
-        version: 0.0.0-dev.32(typescript@5.7.3)
+        specifier: 0.0.0-dev.37
+        version: 0.0.0-dev.37(typescript@5.7.3)
       '@okto_web3/react-sdk':
-        specifier: 0.0.0-dev.32
-        version: 0.0.0-dev.32(react@18.3.1)(typescript@5.7.3)
+        specifier: 0.0.0-dev.37
+        version: 0.0.0-dev.37(react@18.3.1)(typescript@5.7.3)
       axios:
         specifier: ^1.7.2
         version: 1.7.9
@@ -205,11 +205,11 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@okto_web3/core-js-sdk@0.0.0-dev.32':
-    resolution: {integrity: sha512-224IhQiHlWPdDJQdILN5rWKSzzLu3Hn16LFK2j2i8IJl27m33M3N1QqstfzkNS17O+LALJ5aUmgESAQ/JrHbpg==}
+  '@okto_web3/core-js-sdk@0.0.0-dev.37':
+    resolution: {integrity: sha512-tkyLzDUGrJuMfwumeV9Uar0MCwXUbIkJu8pKvO0692tFdNdTWZSgvADyS9Q9rHHQAjB9mccGDxUuHF57oime2A==}
 
-  '@okto_web3/react-sdk@0.0.0-dev.32':
-    resolution: {integrity: sha512-R1QJux4ATQHn1icpCx+6IRqQMeB6/gzHnrecorlsqLTzceSLHvi9iBjn+pCzrxWuyxwjFM2OD7zWrIZjlxVIoA==}
+  '@okto_web3/react-sdk@0.0.0-dev.37':
+    resolution: {integrity: sha512-Z7nVz0WrOPVgNfci9TDywtjEC0I4CfraPYG8eAuPOe9AuClYh83giK+ojBX3QNyFU0QtJr1nQvV3UoP/W6E7OQ==}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -1898,7 +1898,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@okto_web3/core-js-sdk@0.0.0-dev.32(typescript@5.7.3)':
+  '@okto_web3/core-js-sdk@0.0.0-dev.37(typescript@5.7.3)':
     dependencies:
       '@noble/curves': 1.8.1
       '@noble/hashes': 1.7.1
@@ -1913,9 +1913,9 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@okto_web3/react-sdk@0.0.0-dev.32(react@18.3.1)(typescript@5.7.3)':
+  '@okto_web3/react-sdk@0.0.0-dev.37(react@18.3.1)(typescript@5.7.3)':
     dependencies:
-      '@okto_web3/core-js-sdk': 0.0.0-dev.32(typescript@5.7.3)
+      '@okto_web3/core-js-sdk': 0.0.0-dev.37(typescript@5.7.3)
       react: 18.3.1
     transitivePeerDependencies:
       - bufferutil
