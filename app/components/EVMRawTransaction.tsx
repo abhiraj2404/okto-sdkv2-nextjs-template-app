@@ -18,11 +18,11 @@ function EVMRawTransaction() {
   const handleCreateUserOp = async () => {
     try {
       const rawTransactionIntentParams = {
-        networkId,
+        caip2Id: networkId,
         transaction: {
           from: from as Address,
           to: to as Address,
-          value: BigInt(value),
+          value: Number(value),
           data: (data ? data : undefined) as any,
         },
       };
@@ -73,11 +73,11 @@ function EVMRawTransaction() {
   const handleEVMRawTransaction = async () => {
     try {
       const rawTransactionIntentParams = {
-        networkId,
+        caip2Id: networkId,
         transaction: {
           from: from as Address,
           to: to as Address,
-          value: BigInt(value),
+          value: Number(value),
           data: (data ? data : undefined) as any,
         },
       };
