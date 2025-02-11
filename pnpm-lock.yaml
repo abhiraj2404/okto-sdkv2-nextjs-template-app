@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@okto_web3/core-js-sdk':
-        specifier: 0.0.0-dev.42
-        version: 0.0.0-dev.42(typescript@5.7.3)
+        specifier: 0.0.0-dev.47
+        version: 0.0.0-dev.47(typescript@5.7.3)
       '@okto_web3/react-sdk':
-        specifier: 0.0.0-dev.42
-        version: 0.0.0-dev.42(react@18.3.1)(typescript@5.7.3)
+        specifier: 0.0.0-dev.47
+        version: 0.0.0-dev.47(react@18.3.1)(typescript@5.7.3)
       axios:
         specifier: ^1.7.2
         version: 1.7.9
@@ -181,6 +181,10 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@noble/ciphers@1.2.1':
+    resolution: {integrity: sha512-rONPWMC7PeExE077uLE4oqWrZ1IvAfz3oH9LibVAcVCopJiA9R62uavnbEzdkVmJYI6M6Zgkbeb07+tWjlq2XA==}
+    engines: {node: ^14.21.3 || >=16}
+
   '@noble/curves@1.8.1':
     resolution: {integrity: sha512-warwspo+UYUPep0Q+vtdVB4Ugn8GGQj8iyB3gnRWsztmUHTI3S1nhdiWNsPUGL0vud7JlRRk1XEu7Lq1KGTnMQ==}
     engines: {node: ^14.21.3 || >=16}
@@ -205,11 +209,11 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@okto_web3/core-js-sdk@0.0.0-dev.42':
-    resolution: {integrity: sha512-QKS403ztE/ipXHc2nJ5A/GYAY008aQoOeD2Rxx8YHRTe01h8zvo6bQpZVKVNdOEa5ikuX/hQJQFXt/Q3vXNX3A==}
+  '@okto_web3/core-js-sdk@0.0.0-dev.47':
+    resolution: {integrity: sha512-O2j5Oe7TGvUxaDfslI22oKC361IrNeQnR3Am66Eox2o2Vxvwq/XETxzqtIcwtJX5DmO3Mpo50+3qmbb6TS9fuQ==}
 
-  '@okto_web3/react-sdk@0.0.0-dev.42':
-    resolution: {integrity: sha512-glsItGohmOYse7wWaqJLc9+dxwsHOCqtoyaedCMFSRmXTzrJH2diX8aN09PSE1/0wurMjLul0r/2qyCUA1Et8w==}
+  '@okto_web3/react-sdk@0.0.0-dev.47':
+    resolution: {integrity: sha512-LiBFGs1PkxqUhL8uhNN49pSelwyx4Avr6r50o6WW5ad7QkcaVh8UyB5VVmsVKvp4zVhntHBKnFQEi8Bj2qtOLw==}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -1914,6 +1918,8 @@ snapshots:
   '@next/swc-win32-x64-msvc@14.2.10':
     optional: true
 
+  '@noble/ciphers@1.2.1': {}
+
   '@noble/curves@1.8.1':
     dependencies:
       '@noble/hashes': 1.7.1
@@ -1934,7 +1940,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@okto_web3/core-js-sdk@0.0.0-dev.42(typescript@5.7.3)':
+  '@okto_web3/core-js-sdk@0.0.0-dev.47(typescript@5.7.3)':
     dependencies:
       '@noble/curves': 1.8.1
       '@noble/hashes': 1.7.1
@@ -1949,9 +1955,10 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@okto_web3/react-sdk@0.0.0-dev.42(react@18.3.1)(typescript@5.7.3)':
+  '@okto_web3/react-sdk@0.0.0-dev.47(react@18.3.1)(typescript@5.7.3)':
     dependencies:
-      '@okto_web3/core-js-sdk': 0.0.0-dev.42(typescript@5.7.3)
+      '@noble/ciphers': 1.2.1
+      '@okto_web3/core-js-sdk': 0.0.0-dev.47(typescript@5.7.3)
       react: 18.3.1
     transitivePeerDependencies:
       - bufferutil
