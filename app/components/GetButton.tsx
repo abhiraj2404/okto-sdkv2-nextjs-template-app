@@ -12,6 +12,12 @@ const GetButton: React.FC<GetButtonProps> = ({ title, apiFn }) => {
   const oktoClient = useOkto();
 
   const handleButtonClick = () => {
+    if (!oktoClient.isLoggedIn()) {
+      console.log("Not logged in");
+      setResultData(`error: Not logged in`); // Pretty print the JSON
+      setModalVisible(true);
+      return;
+    }
     apiFn(oktoClient)
       .then((result: any) => {
         console.log(`${title}:`, result);
