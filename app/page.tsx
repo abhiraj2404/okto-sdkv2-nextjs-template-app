@@ -42,6 +42,7 @@ export default function Home() {
 
   async function handleLogout() {
     try {
+      oktoClient.sessionClear();
       signOut();
       return { result: "logout success" };
     } catch (error) {
