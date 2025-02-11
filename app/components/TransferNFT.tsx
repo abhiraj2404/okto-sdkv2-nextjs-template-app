@@ -17,6 +17,12 @@ function TransferNFT() {
   const [userOpString, setUserOpString] = useState<string>("");
 
   const handleSubmit = async () => {
+    if (!oktoClient.isLoggedIn()) {
+      console.log("Not logged in");
+      setModalMessage("Error: Not logged in");
+      setModalVisible(true);
+      return;
+    }
     const transferParams = {
       caip2Id: networkId,
       collectionAddress: collectionAddress as Address,

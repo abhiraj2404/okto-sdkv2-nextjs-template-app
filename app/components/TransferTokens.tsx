@@ -17,6 +17,12 @@ function TransferTokens() {
   const [userOpString, setUserOpString] = useState<string>("");
 
   const handleSubmit = async () => {
+    if (!oktoClient.isLoggedIn()) {
+      console.log("Not logged in");
+      setModalMessage("Error: Not logged in");
+      setModalVisible(true);
+      return;
+    }
     const transferParams = {
       amount: Number(quantity),
       recipient: recipientAddress as Address,

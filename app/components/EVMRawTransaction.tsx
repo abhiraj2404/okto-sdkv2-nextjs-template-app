@@ -16,6 +16,12 @@ function EVMRawTransaction() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleCreateUserOp = async () => {
+    if (!oktoClient.isLoggedIn()) {
+      console.log("Not logged in");
+      setResponseMessage("Error: Not logged in");
+      setModalVisible(true);
+      return;
+    }
     try {
       const rawTransactionIntentParams = {
         caip2Id: networkId,
