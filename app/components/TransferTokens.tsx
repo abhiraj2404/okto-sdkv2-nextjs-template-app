@@ -109,7 +109,7 @@ function TransferTokens() {
       )}
 
       {modalVisible && (
-        <div className="fixed text-white inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+        <div className="fixed text-white inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center max-h-screen">
           <div className="bg-black rounded-lg w-11/12 max-w-md p-6">
             <div className="flex justify-between items-center border-b pb-2 mb-4">
               <div className="text-white text-lg font-semibold">Transfer Tokens</div>
@@ -120,7 +120,7 @@ function TransferTokens() {
                 &times;
               </button>
             </div>
-            <div className="text-left">
+            <div className="text-left max-h-[80vh] overflow-y-auto">
               <p>{modalMessage}</p>
             </div>
             <div className="mt-4 text-right">

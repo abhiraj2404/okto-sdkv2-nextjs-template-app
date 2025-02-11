@@ -111,7 +111,7 @@ function EVMRawTransaction() {
   const closeModal = () => setModalVisible(false);
 
   return (
-    <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto">
+    <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto max-h-screen">
       <h1 className="text-white text-2xl font-bold mb-6">EVM Raw Transaction</h1>
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
@@ -206,7 +206,7 @@ function EVMRawTransaction() {
                 &times;
               </button>
             </div>
-            <div className="text-left">
+            <div className="text-left max-h-[80vh] overflow-y-auto">
               <p>{responseMessage}</p>
             </div>
             <div className="mt-4 text-right">
