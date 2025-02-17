@@ -3,9 +3,11 @@ import React, { use, useEffect, useMemo, useContext, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { LoginButton } from "@/app/components/LoginButton";
 import GetButton from "@/app/components/GetButton";
-import {getAccount, getChains, getOrdersHistory, getPortfolio, getPortfolioActivity, getPortfolioNFT, getTokens, useOkto } from '@okto_web3/react-sdk';
+import { getAccount, getChains, getOrdersHistory, getPortfolio, getPortfolioActivity, getPortfolioNFT, getTokens, useOkto } from '@okto_web3/react-sdk';
 import Link from "next/link";
 import { ConfigContext } from "@/app/components/providers";
+import SessionSetter from "@/app/components/SessionSetter";
+import { STORAGE_KEY } from "./constants";
 
 // Add type definitions
 interface Config {
@@ -14,15 +16,10 @@ interface Config {
   vendorSWA: string;
 }
 
-interface ConfigContextType {
-  config: Config;
-  setConfig: React.Dispatch<React.SetStateAction<Config>>;
-}
-
 export default function Home() {
   const { data: session } = useSession();
   const oktoClient = useOkto();
-  const { config, setConfig } = useContext<ConfigContextType>(ConfigContext);
+  const { config, setConfig } = useContext<any>(ConfigContext);
   const [isConfigOpen, setIsConfigOpen] = useState(false);
   
   //@ts-ignore
@@ -160,6 +157,9 @@ export default function Home() {
           </div>
         </form>
       )}
+
+      {/* Session Setter Component */}
+      <SessionSetter />
 
       <div className="grid grid-cols-2 gap-4 w-full max-w-lg mt-8">
         <LoginButton />
