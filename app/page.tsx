@@ -10,8 +10,8 @@ import { ConfigContext } from "@/app/components/providers";
 // Add type definitions
 interface Config {
   environment: string;
-  vendorPrivKey: string;
-  vendorSWA: string;
+  clientPrivateKey: string;
+  clientSWA: string;
 }
 
 interface ConfigContextType {
@@ -62,8 +62,8 @@ export default function Home() {
     const formData = new FormData(e.target as HTMLFormElement);
     setConfig({
       environment: (formData.get('environment') as string) || 'sandbox',
-      vendorPrivKey: (formData.get('vendorPrivKey') as string) || '',
-      vendorSWA: (formData.get('vendorSWA') as string) || '',
+      clientPrivateKey: (formData.get('clientPrivateKey') as string) || '',
+      clientSWA: (formData.get('clientSWA') as string) || '',
     });
     setIsConfigOpen(false);
   };
@@ -72,8 +72,8 @@ export default function Home() {
   const handleResetConfig = () => {
     const defaultConfig = {
       environment: process.env.NEXT_PUBLIC_ENVIRONMENT || 'sandbox',
-      vendorPrivKey: process.env.NEXT_PUBLIC_VENDOR_PRIVATE_KEY || '',
-      vendorSWA: process.env.NEXT_PUBLIC_VENDOR_SWA || '',
+      clientPrivateKey: process.env.NEXT_PUBLIC_CLIENT_PRIVATE_KEY || '',
+      clientSWA: process.env.NEXT_PUBLIC_CLIENT_SWA || '',
     };
     setConfig(defaultConfig);
     try {
@@ -102,8 +102,8 @@ export default function Home() {
           <h3 className="font-medium text-gray-700 mb-2">Current Configuration:</h3>
           <div className="text-sm text-gray-600">
             <p>Environment: {config.environment}</p>
-            <p>Vendor Private Key: {config.vendorPrivKey ? '••••••••' : 'Not set'}</p>
-            <p>Vendor SWA: {config.vendorSWA ? '••••••••' : 'Not set'}</p>
+            <p>Vendor Private Key: {config.clientPrivateKey ? '••••••••' : 'Not set'}</p>
+            <p>Vendor SWA: {config.clientSWA ? '••••••••' : 'Not set'}</p>
           </div>
         </div>
       )}
@@ -127,8 +127,8 @@ export default function Home() {
             <label className="block text-sm font-medium text-gray-700">Vendor Private Key</label>
             <input
               type="text"
-              name="vendorPrivKey"
-              defaultValue={config.vendorPrivKey}
+              name="clientPrivateKey"
+              defaultValue={config.clientPrivateKey}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
             />
           </div>
@@ -137,8 +137,8 @@ export default function Home() {
             <label className="block text-sm font-medium text-gray-700">Vendor SWA</label>
             <input
               type="text"
-              name="vendorSWA"
-              defaultValue={config.vendorSWA}
+              name="clientSWA"
+              defaultValue={config.clientSWA}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
             />
           </div>

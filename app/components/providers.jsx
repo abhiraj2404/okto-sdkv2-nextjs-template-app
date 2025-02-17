@@ -6,8 +6,8 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 // Define the config type and context type
 const defaultConfig = {
   environment: 'sandbox',
-  vendorPrivKey: '',
-  vendorSWA: '',
+  clientPrivateKey: '',
+  clientSWA: '',
 };
 
 export const ConfigContext = createContext({
@@ -22,25 +22,25 @@ function AppProvider({ children, session }) {
   const [config, setConfig] = useState(() => {
     try {
       // Check if we're in the browser environment
-      if (typeof window !== 'undefined') {
+      /*if (typeof window !== 'undefined') {
         const savedConfig = localStorage.getItem(STORAGE_KEY);
         if (savedConfig) {
           const parsed = JSON.parse(savedConfig);
           return {
             environment: parsed.environment || defaultConfig.environment,
-            vendorPrivKey: parsed.vendorPrivKey || defaultConfig.vendorPrivKey,
-            vendorSWA: parsed.vendorSWA || defaultConfig.vendorSWA,
+            clientPrivateKey: parsed.clientPrivateKey || defaultConfig.clientPrivateKey,
+            clientSWA: parsed.clientSWA || defaultConfig.clientSWA,
           };
         }
-      }
+      }*/
     } catch (error) {
       console.error('Error loading config from localStorage:', error);
     }
     // Default config if nothing in localStorage or error occurred
     return {
       environment: process.env.NEXT_PUBLIC_ENVIRONMENT || defaultConfig.environment,
-      vendorPrivKey: process.env.NEXT_PUBLIC_VENDOR_PRIVATE_KEY || defaultConfig.vendorPrivKey,
-      vendorSWA: process.env.NEXT_PUBLIC_VENDOR_SWA || defaultConfig.vendorSWA,
+      clientPrivateKey: process.env.NEXT_PUBLIC_CLIENT_PRIVATE_KEY || defaultConfig.clientPrivateKey,
+      clientSWA: process.env.NEXT_PUBLIC_CLIENT_SWA || defaultConfig.clientSWA,
     };
   });
 
