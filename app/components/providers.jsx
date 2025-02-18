@@ -22,7 +22,7 @@ function AppProvider({ children, session }) {
   const [config, setConfig] = useState(() => {
     try {
       // Check if we're in the browser environment
-      /*if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined') {
         const savedConfig = localStorage.getItem(STORAGE_KEY);
         if (savedConfig) {
           const parsed = JSON.parse(savedConfig);
@@ -32,7 +32,7 @@ function AppProvider({ children, session }) {
             clientSWA: parsed.clientSWA || defaultConfig.clientSWA,
           };
         }
-      }*/
+      }
     } catch (error) {
       console.error('Error loading config from localStorage:', error);
     }
