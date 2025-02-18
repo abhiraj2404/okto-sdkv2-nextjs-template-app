@@ -27,7 +27,7 @@ function TransferTokens() {
       amount: Number(quantity),
       recipient: recipientAddress as Address,
       token: tokenAddress as Address,
-      chain: networkName,
+      caip2Id: networkName,
     }
 
     console.log("Transfer params: ", transferParams);
