@@ -28,7 +28,7 @@ function EVMRawTransaction() {
         transaction: {
           from: from as Address,
           to: to as Address,
-          value: Number(value),
+          value: BigInt(value),
           data: (data ? data : undefined) as any,
         },
       };
@@ -83,7 +83,7 @@ function EVMRawTransaction() {
         transaction: {
           from: from as Address,
           to: to as Address,
-          value: Number(value),
+          value: BigInt(value),
           data: (data ? data : undefined) as any,
         },
       };

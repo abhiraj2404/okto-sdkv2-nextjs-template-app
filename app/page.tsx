@@ -6,6 +6,7 @@ import GetButton from "@/app/components/GetButton";
 import {getAccount, getChains, getOrdersHistory, getPortfolio, getPortfolioActivity, getPortfolioNFT, getTokens, useOkto } from '@okto_web3/react-sdk';
 import Link from "next/link";
 import { ConfigContext } from "@/app/components/providers";
+import { STORAGE_KEY } from "./constants";
 
 // Add type definitions
 interface Config {
