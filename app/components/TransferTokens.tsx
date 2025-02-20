@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { Address, tokenTransfer, useOkto, UserOp } from "@okto_web3/react-sdk";
+import { tokenTransfer as tokenTransferUserOp} from "@okto_web3/core-js-sdk/userop";
+import { Address, useOkto, UserOp } from "@okto_web3/react-sdk";
 
 function TransferTokens() {
   const oktoClient = useOkto();
@@ -32,7 +33,7 @@ function TransferTokens() {
 
     console.log("Transfer params: ", transferParams);
 
-    const userOpTmp = await tokenTransfer(oktoClient, transferParams)
+    const userOpTmp = await tokenTransferUserOp(oktoClient, transferParams)
     setUserOp(userOpTmp);
     setUserOpString(JSON.stringify(userOpTmp, null, 2));
   };
