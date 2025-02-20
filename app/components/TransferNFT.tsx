@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { nftTransfer as nftTransferUserOp } from "@okto_web3/core-js-sdk/userop";
 import { Address, nftTransfer, useOkto } from "@okto_web3/react-sdk";
 
 function TransferNFT() {
@@ -35,7 +36,7 @@ function TransferNFT() {
     console.log("NFT transfer params", transferParams);
 
     try {
-      const userOpTmp = await nftTransfer(oktoClient, transferParams);
+      const userOpTmp = await nftTransferUserOp(oktoClient, transferParams);
       setUserOp(userOpTmp);
       setUserOpString(JSON.stringify(userOpTmp, null, 2));
     } catch (error: any) {
