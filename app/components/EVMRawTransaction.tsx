@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { evmRawTransaction as evmRawTransactionUserOp } from "@okto_web3/core-js-sdk/userop";
 import { useOkto, evmRawTransaction, Address } from "@okto_web3/react-sdk";
 
 function EVMRawTransaction() {
@@ -33,7 +34,7 @@ function EVMRawTransaction() {
         },
       };
       console.log("Creating UserOp with params:", rawTransactionIntentParams);
-      const createdUserOp = await evmRawTransaction(oktoClient, rawTransactionIntentParams);
+      const createdUserOp = await evmRawTransactionUserOp(oktoClient, rawTransactionIntentParams);
       setUserOp(createdUserOp);
       const formattedUserOp = JSON.stringify(createdUserOp, null, 2);
       setEditableUserOp(formattedUserOp);
@@ -88,9 +89,7 @@ function EVMRawTransaction() {
         },
       };
       console.log("Executing EVM Raw Transaction with params:", rawTransactionIntentParams);
-      const createdUserOp = await evmRawTransaction(oktoClient, rawTransactionIntentParams);
-      const signedOp = await oktoClient.signUserOp(createdUserOp);
-      const result = await oktoClient.executeUserOp(signedOp);
+      const result = await evmRawTransaction(oktoClient, rawTransactionIntentParams);
       const formattedResult = JSON.stringify(result, null, 2);
       setResponseMessage(`EVM Raw Transaction executed successfully!\nResult:\n${formattedResult}`);
     } catch (error: any) {
