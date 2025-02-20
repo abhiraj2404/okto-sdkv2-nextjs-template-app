@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { tokenTransfer as tokenTransferUserOp} from "@okto_web3/core-js-sdk/userop";
-import { Address, useOkto, UserOp } from "@okto_web3/react-sdk";
+import { Address, useOkto, UserOp, tokenTransfer } from "@okto_web3/react-sdk";
 
 function TransferTokens() {
   const oktoClient = useOkto();
@@ -55,6 +55,34 @@ function TransferTokens() {
 
   const handleCloseModal = () => setModalVisible(false);
 
+  const handleTransferTokens = async () => {
+    if (!oktoClient.isLoggedIn()) {
+      console.log("Not logged in");
+      setModalMessage("Error: Not logged in");
+      setModalVisible(true);
+      return;
+    }
+    const transferParams = {
+      amount: Number(quantity),
+      recipient: recipientAddress as Address,
+      token: tokenAddress as Address,
+      caip2Id: networkName,
+    }
+
+    console.log("Transfer params: ", transferParams);
+
+    try {
+      const result = await tokenTransfer(oktoClient, transferParams)
+      const formattedResult = JSON.stringify(result, null, 2);
+      setModalMessage(`Execution Result:\n${formattedResult}`);
+      setModalVisible(true);
+    } catch (error: any) {
+      console.error("Error transferring tokens:", error);
+      setModalMessage("Error: " + error.message);
+      setModalVisible(true);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto">
       <h1 className="text-white text-2xl font-bold mb-6">Transfer Tokens</h1>
@@ -82,6 +110,12 @@ function TransferTokens() {
         onChange={(e) => setRecipientAddress(e.target.value)}
         placeholder="Enter Recipient Address"
       />
+       <button
+            className="w-full p-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+            onClick={handleTransferTokens}
+          >
+            Transfer Tokens
+      </button>
       <button
         className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         onClick={handleSubmit}
