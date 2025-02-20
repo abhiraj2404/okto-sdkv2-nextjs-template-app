@@ -120,7 +120,8 @@ export default function Home() {
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
             >
               <option value="sandbox">Sandbox</option>
-              <option value="production">Production</option>
+              <option value="staging">Staging</option>
+              {/* <option value="production">Production</option> */}
             </select>
           </div>
           

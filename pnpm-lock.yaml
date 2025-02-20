@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@okto_web3/core-js-sdk':
-        specifier: 0.1.0
-        version: 0.1.0(typescript@5.7.3)
+        specifier: 0.2.0
+        version: 0.2.0(typescript@5.7.3)
       '@okto_web3/react-sdk':
-        specifier: 0.1.0
-        version: 0.1.0(react@18.3.1)(typescript@5.7.3)
+        specifier: 0.1.1
+        version: 0.1.1(react@18.3.1)(typescript@5.7.3)
       axios:
         specifier: ^1.7.2
         version: 1.7.9
@@ -209,11 +209,11 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@okto_web3/core-js-sdk@0.1.0':
-    resolution: {integrity: sha512-f+YaqBt0YGA3I7vgxeUdXP6chhy5FE3SHGbEZfJBffFXVGa4PQh2NhLFDgKGWtS/gbZz0QMTGBIhtbwsMuplcw==}
+  '@okto_web3/core-js-sdk@0.2.0':
+    resolution: {integrity: sha512-CQXiCoVlqj/4iSc9ZsiFcmSdmkyFV70iwEFgOQDTCwp++OTu2AHVmakGFaOjdajEPvg6ub8P4vxWquZkqZCh9Q==}
 
-  '@okto_web3/react-sdk@0.1.0':
-    resolution: {integrity: sha512-FfBoe3+pNUwqPqjluIdNk+rFr3CklXxp3uHnAd2lZTQdvmeZ6Ex1HKUFKWpMRsUwDSp7PLEWi5Fgp7qXstq74g==}
+  '@okto_web3/react-sdk@0.1.1':
+    resolution: {integrity: sha512-nTXXQYtvR5obgw4IieEYcJK9CWtAbF+CU5lTYdLOE4hQ710lyqLB3kGVkF6W2bJlGOys8Csq06aXMwexiCo6xg==}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -1940,7 +1940,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@okto_web3/core-js-sdk@0.1.0(typescript@5.7.3)':
+  '@okto_web3/core-js-sdk@0.2.0(typescript@5.7.3)':
     dependencies:
       '@noble/curves': 1.8.1
       '@noble/hashes': 1.7.1
@@ -1955,10 +1955,10 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@okto_web3/react-sdk@0.1.0(react@18.3.1)(typescript@5.7.3)':
+  '@okto_web3/react-sdk@0.1.1(react@18.3.1)(typescript@5.7.3)':
     dependencies:
       '@noble/ciphers': 1.2.1
-      '@okto_web3/core-js-sdk': 0.1.0(typescript@5.7.3)
+      '@okto_web3/core-js-sdk': 0.2.0(typescript@5.7.3)
       react: 18.3.1
     transitivePeerDependencies:
       - bufferutil

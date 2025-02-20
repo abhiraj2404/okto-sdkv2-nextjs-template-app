@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 // Define the config type and context type
 const defaultConfig = {
-  environment: 'sandbox',
+  environment: 'staging',
   clientPrivateKey: '',
   clientSWA: '',
 };
