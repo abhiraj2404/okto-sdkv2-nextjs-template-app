@@ -63,6 +63,36 @@ function TransferNFT() {
 
   const handleCloseModal = () => setModalVisible(false);
 
+  const handleTransferNFT = async () => {
+    if (!oktoClient.isLoggedIn()) {
+      console.log("Not logged in");
+      setModalMessage("Error: Not logged in");
+      setModalVisible(true);
+      return;
+    }
+    const transferParams = {
+      caip2Id: networkId,
+      collectionAddress: collectionAddress as Address,
+      nftId,
+      recipientWalletAddress: recipientWalletAddress as Address,
+      amount: Number(amount),
+      nftType: type as 'ERC721' | 'ERC1155',
+    };
+
+    console.log("NFT transfer params", transferParams);
+
+    try {
+      const result = await nftTransfer(oktoClient, transferParams)
+      const formattedResult = JSON.stringify(result, null, 2);
+      setModalMessage(`Execution Result:\n${formattedResult}`);
+      setModalVisible(true);
+    } catch (error: any) {
+      console.error("Error transferring NFT:", error);
+      setModalMessage("Error: " + error.message);
+      setModalVisible(true);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto">
       <h1 className="text-white text-2xl font-bold mb-6">Transfer NFT</h1>
@@ -108,6 +138,13 @@ function TransferNFT() {
         onChange={(e) => setType(e.target.value)}
         placeholder="Enter NFT Type (nft or empty string)"
       />
+
+      <button
+            className="w-full p-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+            onClick={handleTransferNFT}
+          >
+            Transfer NFT
+      </button>
 
       <button
         className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
