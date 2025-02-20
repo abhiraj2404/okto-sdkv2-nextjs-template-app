@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import { evmRawTransaction as evmRawTransactionUserOp } from "@okto_web3/core-js-sdk/userop";
-import { useOkto, evmRawTransaction, Address } from "@okto_web3/react-sdk";
+import { Address, evmRawTransaction, useOkto } from "@okto_web3/react-sdk";
+import { evmRawTransaction as evmRawTransactionUserOp } from "@okto_web3/react-sdk/userop";
+import { useState } from "react";
 
 function EVMRawTransaction() {
   const oktoClient = useOkto();
@@ -34,7 +34,10 @@ function EVMRawTransaction() {
         },
       };
       console.log("Creating UserOp with params:", rawTransactionIntentParams);
-      const createdUserOp = await evmRawTransactionUserOp(oktoClient, rawTransactionIntentParams);
+      const createdUserOp = await evmRawTransactionUserOp(
+        oktoClient,
+        rawTransactionIntentParams
+      );
       setUserOp(createdUserOp);
       const formattedUserOp = JSON.stringify(createdUserOp, null, 2);
       setEditableUserOp(formattedUserOp);
@@ -88,10 +91,18 @@ function EVMRawTransaction() {
           data: (data ? data : undefined) as any,
         },
       };
-      console.log("Executing EVM Raw Transaction with params:", rawTransactionIntentParams);
-      const result = await evmRawTransaction(oktoClient, rawTransactionIntentParams);
+      console.log(
+        "Executing EVM Raw Transaction with params:",
+        rawTransactionIntentParams
+      );
+      const result = await evmRawTransaction(
+        oktoClient,
+        rawTransactionIntentParams
+      );
       const formattedResult = JSON.stringify(result, null, 2);
-      setResponseMessage(`EVM Raw Transaction executed successfully!\nResult:\n${formattedResult}`);
+      setResponseMessage(
+        `EVM Raw Transaction executed successfully!\nResult:\n${formattedResult}`
+      );
     } catch (error: any) {
       console.error("Error executing EVM Raw Transaction:", error);
       setResponseMessage(`Error: ${error.message}`);
@@ -111,7 +122,9 @@ function EVMRawTransaction() {
 
   return (
     <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto max-h-screen">
-      <h1 className="text-white text-2xl font-bold mb-6">EVM Raw Transaction</h1>
+      <h1 className="text-white text-2xl font-bold mb-6">
+        EVM Raw Transaction
+      </h1>
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
         value={networkId}
@@ -197,7 +210,9 @@ function EVMRawTransaction() {
         <div className="fixed text-white inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
           <div className="bg-black rounded-lg w-11/12 max-w-md p-6">
             <div className="flex justify-between items-center border-b pb-2 mb-4">
-              <div className="text-white text-lg font-semibold">EVM Raw Transaction</div>
+              <div className="text-white text-lg font-semibold">
+                EVM Raw Transaction
+              </div>
               <button
                 className="text-gray-500 hover:text-gray-700"
                 onClick={closeModal}

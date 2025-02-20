@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import { tokenTransfer as tokenTransferUserOp} from "@okto_web3/core-js-sdk/userop";
-import { Address, useOkto, UserOp, tokenTransfer } from "@okto_web3/react-sdk";
+import { Address, tokenTransfer, useOkto } from "@okto_web3/react-sdk";
+import { tokenTransfer as tokenTransferUserOp } from "@okto_web3/react-sdk/userop";
+import { useState } from "react";
 
 function TransferTokens() {
   const oktoClient = useOkto();
@@ -9,9 +9,7 @@ function TransferTokens() {
   const [networkName, setNetworkName] = useState("");
   const [tokenAddress, setTokenAddress] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [recipientAddress, setRecipientAddress] = useState(
-    ""
-  );
+  const [recipientAddress, setRecipientAddress] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [userOp, setUserOp] = useState<any | null>(null);
@@ -29,11 +27,11 @@ function TransferTokens() {
       recipient: recipientAddress as Address,
       token: tokenAddress as Address,
       caip2Id: networkName,
-    }
+    };
 
     console.log("Transfer params: ", transferParams);
 
-    const userOpTmp = await tokenTransferUserOp(oktoClient, transferParams)
+    const userOpTmp = await tokenTransferUserOp(oktoClient, transferParams);
     setUserOp(userOpTmp);
     setUserOpString(JSON.stringify(userOpTmp, null, 2));
   };
@@ -67,12 +65,12 @@ function TransferTokens() {
       recipient: recipientAddress as Address,
       token: tokenAddress as Address,
       caip2Id: networkName,
-    }
+    };
 
     console.log("Transfer params: ", transferParams);
 
     try {
-      const result = await tokenTransfer(oktoClient, transferParams)
+      const result = await tokenTransfer(oktoClient, transferParams);
       const formattedResult = JSON.stringify(result, null, 2);
       setModalMessage(`Execution Result:\n${formattedResult}`);
       setModalVisible(true);
@@ -110,11 +108,11 @@ function TransferTokens() {
         onChange={(e) => setRecipientAddress(e.target.value)}
         placeholder="Enter Recipient Address"
       />
-       <button
-            className="w-full p-2 bg-purple-500 text-white rounded hover:bg-purple-600"
-            onClick={handleTransferTokens}
-          >
-            Transfer Tokens
+      <button
+        className="w-full p-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+        onClick={handleTransferTokens}
+      >
+        Transfer Tokens
       </button>
       <button
         className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
@@ -131,7 +129,7 @@ function TransferTokens() {
               value={userOpString}
               onChange={(e) => setUserOpString(e.target.value)}
               rows={10}
-              style={{ resize: 'vertical' }}
+              style={{ resize: "vertical" }}
             />
           </div>
           <button
@@ -147,7 +145,9 @@ function TransferTokens() {
         <div className="fixed text-white inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center max-h-screen">
           <div className="bg-black rounded-lg w-11/12 max-w-md p-6">
             <div className="flex justify-between items-center border-b pb-2 mb-4">
-              <div className="text-white text-lg font-semibold">Transfer Tokens</div>
+              <div className="text-white text-lg font-semibold">
+                Transfer Tokens
+              </div>
               <button
                 className="text-gray-500 hover:text-gray-700"
                 onClick={handleCloseModal}

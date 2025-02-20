@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import { nftTransfer as nftTransferUserOp } from "@okto_web3/core-js-sdk/userop";
 import { Address, nftTransfer, useOkto } from "@okto_web3/react-sdk";
+import { nftTransfer as nftTransferUserOp } from "@okto_web3/react-sdk/userop";
+import { useState } from "react";
 
 function TransferNFT() {
   const oktoClient = useOkto();
@@ -30,7 +30,7 @@ function TransferNFT() {
       nftId,
       recipientWalletAddress: recipientWalletAddress as Address,
       amount: Number(amount),
-      nftType: type as 'ERC721' | 'ERC1155',
+      nftType: type as "ERC721" | "ERC1155",
     };
 
     console.log("NFT transfer params", transferParams);
@@ -76,13 +76,13 @@ function TransferNFT() {
       nftId,
       recipientWalletAddress: recipientWalletAddress as Address,
       amount: Number(amount),
-      nftType: type as 'ERC721' | 'ERC1155',
+      nftType: type as "ERC721" | "ERC1155",
     };
 
     console.log("NFT transfer params", transferParams);
 
     try {
-      const result = await nftTransfer(oktoClient, transferParams)
+      const result = await nftTransfer(oktoClient, transferParams);
       const formattedResult = JSON.stringify(result, null, 2);
       setModalMessage(`Execution Result:\n${formattedResult}`);
       setModalVisible(true);
@@ -96,35 +96,35 @@ function TransferNFT() {
   return (
     <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto">
       <h1 className="text-white text-2xl font-bold mb-6">Transfer NFT</h1>
-      
+
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
         value={networkId}
         onChange={(e) => setNetworkId(e.target.value)}
         placeholder="Enter Network ChainId"
       />
-      
+
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
         value={collectionAddress}
         onChange={(e) => setCollectionAddress(e.target.value)}
         placeholder="Enter Collection Address"
       />
-      
+
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
         value={nftId}
         onChange={(e) => setNftId(e.target.value)}
         placeholder="Enter NFT ID"
       />
-      
+
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
         value={recipientWalletAddress}
         onChange={(e) => setRecipientWalletAddress(e.target.value)}
         placeholder="Enter Recipient Wallet Address"
       />
-      
+
       <input
         className="w-full p-2 mb-4 border border-gray-300 rounded text-black"
         value={amount}
@@ -140,10 +140,10 @@ function TransferNFT() {
       />
 
       <button
-            className="w-full p-2 bg-purple-500 text-white rounded hover:bg-purple-600"
-            onClick={handleTransferNFT}
-          >
-            Transfer NFT
+        className="w-full p-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+        onClick={handleTransferNFT}
+      >
+        Transfer NFT
       </button>
 
       <button
@@ -161,7 +161,7 @@ function TransferNFT() {
               value={userOpString}
               onChange={(e) => setUserOpString(e.target.value)}
               rows={10}
-              style={{ resize: 'vertical' }}
+              style={{ resize: "vertical" }}
             />
           </div>
           <button
@@ -177,7 +177,9 @@ function TransferNFT() {
         <div className="fixed text-white inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center max-h-screen">
           <div className="bg-black rounded-lg w-11/12 max-w-md p-6">
             <div className="flex justify-between items-center border-b pb-2 mb-4">
-              <div className="text-white text-lg font-semibold">NFT Transfer Status</div>
+              <div className="text-white text-lg font-semibold">
+                NFT Transfer Status
+              </div>
               <button
                 className="text-gray-500 hover:text-gray-700"
                 onClick={handleCloseModal}
@@ -203,4 +205,4 @@ function TransferNFT() {
   );
 }
 
-export default TransferNFT; 
+export default TransferNFT;
