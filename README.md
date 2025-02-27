@@ -36,5 +36,4 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-https://okto-sdk-react-example.vercel.app
-https://okto-sdk-react-example.vercel.app/api/auth/callback/google
+[https://v2-react-sdk-sample-app.vercel.app/](https://v2-react-sdk-sample-app.vercel.app/)
