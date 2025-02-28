@@ -5,14 +5,14 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 // Define the config type and context type
 const defaultConfig = {
-  environment: 'staging',
+  environment: 'sandbox',
   clientPrivateKey: '',
   clientSWA: '',
 };
 
 export const ConfigContext = createContext({
   config: defaultConfig,
-  setConfig: () => {},
+  setConfig: (config) => {},
 });
 
 const STORAGE_KEY = 'okto_config';

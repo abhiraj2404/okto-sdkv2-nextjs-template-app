@@ -36,8 +36,11 @@ export default function Home() {
     const user = await oktoClient.loginUsingOAuth({
       idToken: idToken,
       provider: 'google',
-    });
-    console.log("Authenticateion Success", user);
+    } , (session: any) => {
+      console.log("session", session);
+      localStorage.setItem("okto_session" , JSON.stringify(session));
+    }
+  );
     return JSON.stringify(user);
   }
 
@@ -85,6 +88,13 @@ export default function Home() {
     setIsConfigOpen(false);
   };
 
+  const getSessionInfo = async () => {
+    const session = localStorage.getItem("okto_session");
+    const sessionInfo = JSON.parse(session || "{}");
+    return { result: sessionInfo };
+    
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center space-y-6 p-12 bg-violet-200">
       <div className="text-black font-bold text-3xl mb-8">Okto v2 SDK</div>
@@ -103,8 +113,8 @@ export default function Home() {
           <h3 className="font-medium text-gray-700 mb-2">Current Configuration:</h3>
           <div className="text-sm text-gray-600">
             <p>Environment: {config.environment}</p>
-            <p>Vendor Private Key: {config.clientPrivateKey ? '••••••••' : 'Not set'}</p>
-            <p>Vendor SWA: {config.clientSWA ? '••••••••' : 'Not set'}</p>
+            <p>Client Private Key: {config.clientPrivateKey ? '••••••••' : 'Not set'}</p>
+            <p>Client SWA: {config.clientSWA ? '••••••••' : 'Not set'}</p>
           </div>
         </div>
       )}
@@ -126,7 +136,7 @@ export default function Home() {
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700">Vendor Private Key</label>
+            <label className="block text-sm font-medium text-gray-700">Client Private Key</label>
             <input
               type="text"
               name="clientPrivateKey"
@@ -136,7 +146,7 @@ export default function Home() {
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700">Vendor SWA</label>
+            <label className="block text-sm font-medium text-gray-700">Client SWA</label>
             <input
               type="text"
               name="clientSWA"
@@ -163,10 +173,19 @@ export default function Home() {
         </form>
       )}
 
+      <div className="w-full max-w-lg bg-white p-4 rounded-lg shadow-md">
+        <h3 className="font-medium text-gray-700 mb-2">Details:</h3>
+        <div className="text-sm text-gray-600">
+          <p>{`UserSWA: ${oktoClient.userSWA}`}</p>
+          <p>{`ClientSWA: ${oktoClient.clientSWA}`}</p>
+        </div>
+      </div>
+
       <div className="grid grid-cols-2 gap-4 w-full max-w-lg mt-8">
         <LoginButton />
 
         {/* <GetButton title="Okto Authenticate" apiFn={handleAuthenticate} /> */}
+        <GetButton title="Show Session Info" apiFn={getSessionInfo} />
         <GetButton title="Okto Log out" apiFn={handleLogout} />
         <GetButton title="getAccount" apiFn={getAccount} />
         <GetButton title="getChains" apiFn={getChains} />
