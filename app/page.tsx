@@ -25,7 +25,8 @@ export default function Home() {
   const oktoClient = useOkto();
   const { config, setConfig } = useContext<ConfigContextType>(ConfigContext);
   const [isConfigOpen, setIsConfigOpen] = useState(false);
-  
+  const [userSWA, setUserSWA] = useState("not signed in");
+
   //@ts-ignore
   const idToken = useMemo(() => (session ? session.id_token : null), [session]);
 
@@ -36,11 +37,14 @@ export default function Home() {
     const user = await oktoClient.loginUsingOAuth({
       idToken: idToken,
       provider: 'google',
-    } , (session: any) => {
+    } ,  (session: any) => {
+      // Store the session info securely
       console.log("session", session);
-      localStorage.setItem("okto_session" , JSON.stringify(session));
+      localStorage.setItem("okto_session_info", JSON.stringify(session));
+      setUserSWA(session.userSWA);
     }
   );
+    console.log("authenticated", user);
     return JSON.stringify(user);
   }
 
@@ -89,7 +93,7 @@ export default function Home() {
   };
 
   const getSessionInfo = async () => {
-    const session = localStorage.getItem("okto_session");
+    const session = localStorage.getItem("okto_session_info");
     const sessionInfo = JSON.parse(session || "{}");
     return { result: sessionInfo };
     
@@ -176,8 +180,8 @@ export default function Home() {
       <div className="w-full max-w-lg bg-white p-4 rounded-lg shadow-md">
         <h3 className="font-medium text-gray-700 mb-2">Details:</h3>
         <div className="text-sm text-gray-600">
-          <p>{`UserSWA: ${oktoClient.userSWA}`}</p>
-          <p>{`ClientSWA: ${oktoClient.clientSWA}`}</p>
+          <p>{`UserSWA: ${userSWA}`}</p>
+          <p>{`ClientSWA: ${config.clientSWA}`}</p>
         </div>
       </div>
 
