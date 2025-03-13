@@ -76,7 +76,3 @@ For other deployment options, follow the [Next.js deployment documentation](http
 ## Contributing
 
 Contributions are welcome! Please take a moment to review our [CONTRIBUTING.md](CONTRIBUTING.md) guidelines before submitting any Pull Requests. Your contributions are invaluable to the Okto community.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
