@@ -737,7 +737,7 @@ function TransferTokens() {
           documentation on{" "}
           <a
             className="underline text-indigo-300"
-            href="https://docs.okto.tech/docs/react-sdk/tokenTransfer"
+            href="https://docs.okto.tech/docs/nextjs-sdk/tokenTransfer"
             target="_blank"
             rel="noopener noreferrer"
           >
