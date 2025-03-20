@@ -539,7 +539,7 @@ function EVMRawTransaction() {
           {/* Symbol Input */}
           <div className="w-full my-2">
             <label className="block text-sm font-medium text-gray-300 mb-1">
-              Data (Optionally '0x')
+              Data (Optionally &apos;0x&apos;)
             </label>
             <input
               className="w-full p-3 mb-4 bg-gray-800 border border-gray-700 rounded text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
