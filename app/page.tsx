@@ -232,23 +232,13 @@ export default function Home() {
           <p>{`ClientSWA: ${config.clientSWA}`}</p>
         </div>
       </div>
-      <ModalWithOTP />
-      {/* Open WebView Button */}
-      <button
-        onClick={handleAuthenticateWebView}
-        className="px-16 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
-      >
-        Connect
-      </button>
-      <button
-        onClick={handleLoginUsingGoogle}
-        className="px-16 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
-      >
-        Google Login
-      </button>
+      <ModalWithOTP
+        setUserSWA={setUserSWA}
+      />
       <div className="grid grid-cols-2 gap-4 w-full max-w-lg mt-8">
+        <GetButton title="Onboarding WebView" apiFn={handleWebViewAuthentication} />
+        <GetButton title="Authenticate GAuth" apiFn={handleLoginUsingGoogle} />
         <LoginButton />
-
         {/* <GetButton title="Okto Authenticate" apiFn={handleAuthenticate} /> */}
         <GetButton title="Show Session Info" apiFn={getSessionInfo} />
         <GetButton title="Okto Log out" apiFn={handleLogout} />
