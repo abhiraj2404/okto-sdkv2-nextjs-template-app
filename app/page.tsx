@@ -3,11 +3,12 @@ import React, { use, useEffect, useMemo, useContext, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { LoginButton } from "@/app/components/LoginButton";
 import GetButton from "@/app/components/GetButton";
-import {getAccount, getChains, getOrdersHistory, getPortfolio, getPortfolioActivity, getPortfolioNFT, getTokens, useOkto } from '@okto_web3/react-sdk';
+import { getAccount, getChains, getOrdersHistory, getPortfolio, getPortfolioActivity, getPortfolioNFT, getTokens, useOkto, useWebViewAuth } from '@okto_web3/react-sdk';
 import Link from "next/link";
 import { ConfigContext } from "@/app/components/providers";
 import { STORAGE_KEY } from "./constants";
 import SignComponent from "./components/SignComponent";
+import ModalWithOTP from "./components/EmailWhatsappAuth";
 
 // Add type definitions
 interface Config {
@@ -101,6 +102,38 @@ export default function Home() {
     return { result: sessionInfo };
   };
 
+  async function handleWebViewAuthentication() {
+    console.log("Web-view triggered..");
+    try {
+      const result = await oktoClient.authenticateWithWebView({
+        width: 400,
+        height: 700,
+        onClose: () => {
+          console.log('WebView was closed');
+        }
+      });
+      console.log('Authentication result:', result);
+    } catch (error) {
+      console.error('Authentication failed:', error);
+    }
+  }
+
+  const { isModalOpen, authenticate } = useWebViewAuth();
+
+  const handleAuthenticateWebView = async () => {
+    try {
+      const result = await authenticate();
+      console.log('Authentication successful:', result);
+    } catch (error) {
+      console.error('Authentication failed:', error);
+    }
+  };
+
+  async function handleLoginUsingGoogle() {
+    const result = await oktoClient.loginUsingGoogleAuth();
+    console.log("Google login result:", result);
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center space-y-6 p-12 bg-violet-200">
       <div className="text-black font-bold text-3xl mb-8">Okto v2 SDK</div>
@@ -192,7 +225,6 @@ export default function Home() {
           </div>
         </form>
       )}
-
       <div className="w-full max-w-lg bg-white p-4 rounded-lg shadow-md">
         <h3 className="font-medium text-gray-700 mb-2">Details:</h3>
         <div className="text-sm text-gray-600">
@@ -200,10 +232,13 @@ export default function Home() {
           <p>{`ClientSWA: ${config.clientSWA}`}</p>
         </div>
       </div>
-
+      <ModalWithOTP
+        setUserSWA={setUserSWA}
+      />
       <div className="grid grid-cols-2 gap-4 w-full max-w-lg mt-8">
+        <GetButton title="Onboarding WebView" apiFn={handleWebViewAuthentication} />
+        <GetButton title="Authenticate GAuth" apiFn={handleLoginUsingGoogle} />
         <LoginButton />
-
         {/* <GetButton title="Okto Authenticate" apiFn={handleAuthenticate} /> */}
         <GetButton title="Show Session Info" apiFn={getSessionInfo} />
         <GetButton title="Okto Log out" apiFn={handleLogout} />
