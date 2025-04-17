@@ -1,7 +1,7 @@
 import { useOkto } from "@okto_web3/react-sdk";
 import React, { useState } from "react";
 
-export default function ModalWithOTP() {
+export default function ModalWithOTP({ setUserSWA }: { setUserSWA: (swa: string) => void }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [method, setMethod] = useState<"email" | "whatsapp">("email");
     const [contact, setContact] = useState("");
@@ -46,7 +46,8 @@ export default function ModalWithOTP() {
                 setContact(""); // Clear contact input
                 setOtp(""); // Clear OTP input
             });
-            console.log("Email OTP verification response:", response);       
+            console.log("Email OTP verification response:", response); 
+            setUserSWA(response as string);      
         } else {
             console.log('Verifying WhatsApp OTP:', {
                 phoneNumber: contact,
@@ -61,6 +62,7 @@ export default function ModalWithOTP() {
                 setOtp(""); // Clear OTP input
             });
             console.log("WhatsApp OTP verification response:", response);
+            setUserSWA(response as string);
         }
 
     };
