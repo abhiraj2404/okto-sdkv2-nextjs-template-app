@@ -130,7 +130,7 @@ export default function Home() {
   };
 
   async function handleLoginUsingGoogle() {
-    const result = await oktoClient.loginUsingGoogleAuth();
+    const result = oktoClient.loginUsingSocial('google');
     console.log("Google login result:", result);
   }
 
@@ -236,8 +236,18 @@ export default function Home() {
         setUserSWA={setUserSWA}
       />
       <div className="grid grid-cols-2 gap-4 w-full max-w-lg mt-8">
-        <GetButton title="Onboarding WebView" apiFn={handleWebViewAuthentication} />
-        <GetButton title="Authenticate GAuth" apiFn={handleLoginUsingGoogle} />
+        <button
+          onClick={handleAuthenticateWebView}
+          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+        >
+          Onboarding WebView
+        </button>
+        <button
+          onClick={handleLoginUsingGoogle}
+          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+        >
+          Authenticate GAuth
+        </button>
         <LoginButton />
         {/* <GetButton title="Okto Authenticate" apiFn={handleAuthenticate} /> */}
         <GetButton title="Show Session Info" apiFn={getSessionInfo} />
@@ -282,6 +292,12 @@ export default function Home() {
       >
         Go to EVM Raw transaction
       </Link>
+      {/* <Link
+        href="/aptosrawtxn"
+        className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+      >
+        Go to APTOS Raw transaction
+      </Link> */}
     </main>
   );
 }
