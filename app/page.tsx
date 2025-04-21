@@ -292,12 +292,12 @@ export default function Home() {
       >
         Go to EVM Raw transaction
       </Link>
-      <Link
+      {/* <Link
         href="/aptosrawtxn"
         className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
       >
         Go to APTOS Raw transaction
-      </Link>
+      </Link> */}
     </main>
   );
 }
